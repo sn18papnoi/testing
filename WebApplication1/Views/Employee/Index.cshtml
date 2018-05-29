@@ -1,0 +1,53 @@
+﻿@model List<WebApplication1.Models.Employee>
+@{
+    ViewBag.Title = "Employee";
+}
+
+<h1>Employee List</h1>
+<a href="@Url.Action("Add","Employee")"> Add</a>
+<table>
+    <tr>
+        <th>
+            Sr NO.
+            </th>
+        <th>
+            Name
+        </th>
+        <th>
+            DOB
+        </th>
+        <th>
+            Country
+        </th>
+    </tr>
+    @if (Model != null && Model.Count > 0)
+    {
+        int i = 1;
+        foreach (WebApplication1.Models.Employee e in Model)
+        {
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @e.FullName
+                </td>
+                <td>
+                    @(String.Format("{0:dd-MMM-yyyy}",e.DOB))
+                </td>
+                <td>
+                    @e.Country.Name
+                </td>
+            </tr>
+            i++;
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="4">Record Not Found</td>
+        </tr>
+    }
+</table>
+
+

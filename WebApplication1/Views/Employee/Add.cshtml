@@ -1,0 +1,89 @@
+﻿@model WebApplication1.Models.Employee
+@{
+    ViewBag.Title = "Add";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script>
+    $(function () {
+        $("#dtDOB").datepicker();
+    });
+
+  function SaveForm()
+  {
+      var fullName = $('#FullName').val();
+      var Country = $('#CountryId').val();
+      var DOB = $('#dtDOB').val();
+      var EmailId = $('#EmailId').val();
+      var errorCOunt = 0;
+      if (fullName=="")
+      {
+          $('#FullNameError').html("Enter Full Name");
+          errorCOunt++;
+      }
+      else
+      {
+          $('#FullNameError').html("");
+      }
+
+      if (Country == "") {
+          $('#CountryError').html("Select Country");
+          errorCOunt++;
+      }
+      else {
+          $('#CountryError').html("");
+      }
+
+      if (DOB == "") {
+          $('#DOBError').html("select DOB");
+          errorCOunt++;
+      }
+      else {
+          $('#DOBError').html("");
+      }
+
+      if (EmailId == "") {
+          $('#EmailError').html("Enter Email Id");
+          errorCOunt++;
+      }
+      else {
+          $('#EmailError').html("");
+      }
+
+      if(errorCOunt==0)
+      {
+          return true;
+      }
+      return false;
+  }
+</script>
+<h2>Add</h2>
+<form action="@Url.Action("Add","Employee")" method="post" onsubmit="return SaveForm()">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>@Html.TextBoxFor(x => x.FullName)</td>
+            <td><span id="FullNameError"></span></td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td>@Html.DropDownListFor(x => x.CountryId, new SelectList(ViewBag.Country, "Id", "Name"), "Select Country")</td>
+            <td><span id="CountryError"></span></td>
+        </tr>
+        <tr>
+            <td>DOB</td>
+            <td>@Html.TextBoxFor(x => x.DOB,new { id="dtDOB"})</td>
+            <td><span id="DOBError"></span></td>
+        </tr>
+        <tr>
+            <td>Email Id</td>
+            <td>@Html.TextBoxFor(x => x.EmailId)</td>
+            <td><span id="EmailError"></span></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="submit" />
+            </td>
+        </tr>
+    </table>
+</form>
+
